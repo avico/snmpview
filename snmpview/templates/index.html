@@ -40,5 +40,18 @@
     {% endfor %}
     </tbody>
     </table>
+    <div class="pagination">
+    <span class="step-links">
+        {% if alarms.has_previous %}
+            <a href="?page={{ alarms.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ alarms.number }} of {{ alarms.paginator.num_pages }}.
+        </span>
+        {% if alarms.has_next %}
+            <a href="?page={{ alarms.next_page_number }}">Next</a>
+        {% endif %}
+    </span>
+    </div>
   </body>
 </html>
