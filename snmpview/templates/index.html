@@ -31,7 +31,7 @@
         <td>{{ alarm.target }}</td>
         <td>{{ alarm.problem }}</td>
         <td>{{ alarm.trap }}</td>
-        <td width="200">
+        <td width="330">
           <span style="cursor:pointer;color:blue;" onClick="expandit('{{ forloop.counter }}')">Expand varbinds...</span>
           <div id = "{{ forloop.counter }}" style="display:none">{{ alarm.varbinds }}</div>          
         </td>
