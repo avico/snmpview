@@ -2,12 +2,19 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Language" content="ru"/>
+    <script language="JavaScript">
+      function expandit(id){
+      obj = document.getElementById(id);
+      if (obj.style.display=="none") obj.style.display="";
+      else obj.style.display="none";
+      }
+    </script>
     <title>SNMP Alarm List</title>
   </head>
   <body>
     <h1>Recent alarms</h1>
-    <table>
-    <thead>
+    <table border="1" cellpadding="3">
+    <thead bgcolor="yellow">
       <tr>
         <th>Time</th>
         <th>NE</th>
@@ -24,7 +31,10 @@
         <td>{{ alarm.target }}</td>
         <td>{{ alarm.problem }}</td>
         <td>{{ alarm.trap }}</td>
-        <td>{{ alarm.varbinds }}</td>
+        <td width="200">
+          <span style="cursor:pointer;color:blue;" onClick="expandit('{{ forloop.counter }}')">Expand varbinds...</span>
+          <div id = "{{ forloop.counter }}" style="display:none">{{ alarm.varbinds }}</div>          
+        </td>
         <td>{{ alarm.ack }}</td>
       </tr>
     {% endfor %}
