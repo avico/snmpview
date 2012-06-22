@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="ru"/>
+    <title>SNMP Alarm List</title>
+  </head>
+  <body>
+    <h1>Recent alarms</h1>
+    <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>NE</th>
+        <th>Problem</th>
+        <th>Trap</th>
+        <th>Varbinds</th>
+        <th>Acknowledge</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for alarm in alarms  %}
+      <tr>
+        <td>{{ alarm.datetime }}</td>
+        <td>{{ alarm.target }}</td>
+        <td>{{ alarm.problem }}</td>
+        <td>{{ alarm.trap }}</td>
+        <td>{{ alarm.varbinds }}</td>
+        <td>{{ alarm.ack }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+  </body>
+</html>
