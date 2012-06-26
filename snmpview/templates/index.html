@@ -13,6 +13,7 @@
   </head>
   <body>
     <h1>Recent alarms</h1>
+    {% include 'pages.html' %}
     <table border="1" cellpadding="3">
     <thead bgcolor="yellow">
       <tr>
@@ -40,18 +41,6 @@
     {% endfor %}
     </tbody>
     </table>
-    <div class="pagination">
-    <span class="step-links">
-        {% if alarms.has_previous %}
-            <a href="?page={{ alarms.previous_page_number }}">Previous</a>
-        {% endif %}
-        <span class="current">
-            Page {{ alarms.number }} of {{ alarms.paginator.num_pages }}.
-        </span>
-        {% if alarms.has_next %}
-            <a href="?page={{ alarms.next_page_number }}">Next</a>
-        {% endif %}
-    </span>
-    </div>
+    {% include 'pages.html' %}
   </body>
 </html>

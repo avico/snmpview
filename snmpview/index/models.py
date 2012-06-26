@@ -7,6 +7,9 @@ class Alist(models.Model):
     trap = models.CharField(max_length=100, blank=True)
     varbinds = models.TextField(blank=True)
     ack = models.CharField(max_length=60, blank=True)
+    
+    def __unicode__(self):
+		return '%s - %s' % (self.datetime, self.target)
 
     class Meta:
         db_table = u'alist'
