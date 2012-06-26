@@ -2,19 +2,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Language" content="ru"/>
-    <script language="JavaScript">
-      function expandit(id){
-      obj = document.getElementById(id);
-      if (obj.style.display=="none") obj.style.display="";
-      else obj.style.display="none";
-      }
-    </script>
+    {% include 'js.html' %}
     <title>SNMP Alarm List</title>
   </head>
   <body>
     <h1>Recent alarms</h1>
     {% include 'pages.html' %}
-    <table border="1" cellpadding="3">
+    <table border="1" cellpadding="3" id="alarms">
     <thead bgcolor="yellow">
       <tr>
         <th>Time</th>
@@ -26,18 +20,45 @@
       </tr>
     </thead>
     <tbody>
-    {% for alarm in alarms  %}
+    {% for alarm in galarms  %}
+    {% if alarm|length > 1 %}
       <tr>
-        <td>{{ alarm.datetime }}</td>
-        <td>{{ alarm.target }}</td>
-        <td>{{ alarm.problem }}</td>
-        <td>{{ alarm.trap }}</td>
+        <td>{{ alarm.0.datetime }}</td>
+        <td><span style="cursor:pointer;color:red;" onClick="expandclass('{{ forloop.counter|add:"355501" }}')">Expand {{ alarm.0.target }}...</span></td>
+        <td>{{ alarm.0.problem }}</td>
+        <td>{{ alarm.0.trap }}</td>
         <td width="330">
           <span style="cursor:pointer;color:blue;" onClick="expandit('{{ forloop.counter }}')">Expand varbinds...</span>
-          <div id = "{{ forloop.counter }}" style="display:none">{{ alarm.varbinds }}</div>          
+          <div id = "{{ forloop.counter }}" style="display:none">{{ alarm.0.varbinds }}</div>          
         </td>
-        <td>{{ alarm.ack }}</td>
+        <td>{{ alarm.0.ack }}</td>
       </tr>
+        {% for al in alarm|slice:"1:" %}
+        <tr class="{{ forloop.parentloop.counter|add:"355501" }}" style="display:none" bgcolor="#FFFFCC">
+          <td>{{ al.datetime }}</td>
+          <td>{{ al.target }}</td>
+          <td>{{ al.problem }}</td>
+          <td>{{ al.trap }}</td>
+          <td width="330">
+            <span style="cursor:pointer;color:blue;" onClick="expandit('{{ forloop.counter|add:"501" }}')">Expand varbinds...</span>
+            <div id = "{{ forloop.counter|add:"501" }}" style="display:none">{{ al.varbinds }}</div>          
+          </td>
+          <td>{{ al.ack }}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+      <tr>
+        <td>{{ alarm.0.datetime }}</td>
+        <td>{{ alarm.0.target }}</td>
+        <td>{{ alarm.0.problem }}</td>
+        <td>{{ alarm.0.trap }}</td>
+        <td width="330">
+          <span style="cursor:pointer;color:blue;" onClick="expandit('{{ forloop.counter }}')">Expand varbinds...</span>
+          <div id = "{{ forloop.counter }}" style="display:none">{{ alarm.0.varbinds }}</div>          
+        </td>
+        <td>{{ alarm.0.ack }}</td>
+      </tr>
+    {% endif %}
     {% endfor %}
     </tbody>
     </table>

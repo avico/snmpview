@@ -17,7 +17,7 @@ def index(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         alarms = paginator.page(paginator.num_pages)
-    return render_to_response('index.html',{'alarms': alarms})
+    return render_to_response('index.html',{'alarms': alarms, 'galarms': group(alarms)})
 
 """
 internal helper function

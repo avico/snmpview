@@ -1,0 +1,37 @@
+    <script language="JavaScript"> 
+      function expandit(id){
+      obj = document.getElementById(id);
+      if (obj.style.display=="none") obj.style.display="";
+      else obj.style.display="none";
+      }
+    </script> 
+	<script language="JavaScript"> 
+	  function getElementsByClass(classList, node) {			
+		var node = node || document,
+		list = node.getElementsByTagName('*'), 
+		length = list.length,  
+		classArray = classList.split(/\s+/), 
+		classes = classArray.length, 
+		result = [], i,j
+		for(i = 0; i < length; i++) {
+			for(j = 0; j < classes; j++)  {
+				if(list[i].className.search('\\b' + classArray[j] + '\\b') != -1) {
+					result.push(list[i])
+					break
+				}
+			}
+		}
+	
+		return result
+	  }
+	</script>
+	<script language="JavaScript">
+	function expandclass(cl){
+	  tab = document.getElementById("alarms");
+	  objs = getElementsByClass(cl, tab);
+	  for (var i=0;i<objs.length;i++){
+	    if (objs[i].style.display=="none") objs[i].style.display="";
+        else objs[i].style.display="none";
+	  }
+    }
+	</script>
