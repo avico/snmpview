@@ -5,9 +5,9 @@ from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from snmpview.index.models import Alist
 
-def index(request):
+def index(request, row_per_page=100):
     all_alarms = Alist.objects.using('alist').all()
-    paginator = Paginator(all_alarms, 50)
+    paginator = Paginator(all_alarms, int(row_per_page))
     page = request.GET.get('page')
     try:
         alarms = paginator.page(page)

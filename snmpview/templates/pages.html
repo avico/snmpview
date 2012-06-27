@@ -1,13 +1,13 @@
     <div class="pagination">
     <span class="step-links">
         {% if alarms.has_previous %}
-            <a href="?page={{ alarms.previous_page_number }}">&lt;&lt;- Previous</a>
+            <a href="?page={{ alarms.previous_page_number }}">Previous</a>
         {% endif %}
         <span class="current">
-            Page {{ alarms.number }} of {{ alarms.paginator.num_pages }}.
+            [Page <b>{{ alarms.number }}</b> of <b>{{ alarms.paginator.num_pages }}</b> (<b>{{ alarms.object_list|length }}</b> alarms per page)]
         </span>
         {% if alarms.has_next %}
-            <a href="?page={{ alarms.next_page_number }}">Next -&gt;&gt;</a>
+            <a href="?page={{ alarms.next_page_number }}">Next</a>
         {% endif %}
     </span>
     </div>

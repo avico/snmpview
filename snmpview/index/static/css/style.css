@@ -1,0 +1,19 @@
+a#title {
+cursor:default;
+text-decoration:none;
+color:#383838;
+background-color:orange;
+padding:10px;
+border:4px solid gold;
+}
+
+body { 
+font: "Trebuchet MS", sans-serif;
+margin: 10px;
+}
+
+table#alarms {
+border-width: 1;
+border-style: double;
+border-color: silver;
+}
