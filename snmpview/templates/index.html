@@ -9,7 +9,7 @@
     <h1>Recent alarms</h1>
     {% include 'pages.html' %}
     <table border="1" cellpadding="3" id="alarms">
-    <thead bgcolor="yellow">
+    <thead bgcolor="#FFD700">
       <tr>
         <th>Time</th>
         <th>NE</th>
@@ -20,11 +20,13 @@
       </tr>
     </thead>
     <tbody>
+    {# load custom filter #}
+    {% load varbinds_id %}
     {% for alarm in galarms  %}
     {% if alarm|length > 1 %}
-      <tr>
+      <tr bgcolor="#FFFACD">
         <td>{{ alarm.0.datetime }}</td>
-        <td><span style="cursor:pointer;color:red;" onClick="expandclass('{{ forloop.counter|add:"355501" }}')">Expand {{ alarm.0.target }}...</span></td>
+        <td><span style="cursor:pointer;color:red;" onClick="expandclass('{{ forloop.counter|add:"10121000" }}')">Expand {{ alarm.0.target }}...</span></td>
         <td>{{ alarm.0.problem }}</td>
         <td>{{ alarm.0.trap }}</td>
         <td width="330">
@@ -34,20 +36,20 @@
         <td>{{ alarm.0.ack }}</td>
       </tr>
         {% for al in alarm|slice:"1:" %}
-        <tr class="{{ forloop.parentloop.counter|add:"355501" }}" style="display:none" bgcolor="#FFFFCC">
+        <tr class="{{ forloop.parentloop.counter|add:"10121000" }}" style="display:none" bgcolor="#EEE9BF">
           <td>{{ al.datetime }}</td>
           <td>{{ al.target }}</td>
           <td>{{ al.problem }}</td>
           <td>{{ al.trap }}</td>
           <td width="330">
-            <span style="cursor:pointer;color:blue;" onClick="expandit('{{ forloop.counter|add:"501" }}')">Expand varbinds...</span>
-            <div id = "{{ forloop.counter|add:"501" }}" style="display:none">{{ al.varbinds }}</div>          
+            <span style="cursor:pointer;color:blue;" onClick="expandit('{{ forloop.parentloop.counter|varbinds_id:forloop.counter }}')">Expand varbinds...</span>
+            <div id = "{{ forloop.parentloop.counter|varbinds_id:forloop.counter }}" style="display:none">{{ al.varbinds }}</div>          
           </td>
           <td>{{ al.ack }}</td>
         </tr>
         {% endfor %}
     {% else %}
-      <tr>
+      <tr bgcolor="#FFFACD">
         <td>{{ alarm.0.datetime }}</td>
         <td>{{ alarm.0.target }}</td>
         <td>{{ alarm.0.problem }}</td>
