@@ -13,13 +13,14 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
+import os, sys
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "snmpview.settings")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
+sys.path.append('/home/andrew/python/snmpview/')
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
